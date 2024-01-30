@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio - Mathis</title>
+    <title>Mon Portfolio Futuriste</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -11,6 +11,7 @@
             padding: 0;
             background-color: #1a1a1a;
             color: #fff;
+            transition: background-color 0.5s;
         }
 
         header {
@@ -27,6 +28,7 @@
             background-color: #292929;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            transition: background-color 0.5s, box-shadow 0.5s;
         }
 
         h1, h2, h3 {
@@ -57,12 +59,51 @@
             bottom: 0;
             width: 100%;
         }
+
+        /* Bouton pour ouvrir la palette de couleurs */
+        .color-button {
+            background-color: #61dafb;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .color-button:hover {
+            background-color: #4fa8db;
+        }
+
+        /* Interface de la palette de couleurs */
+        .color-palette {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .color-palette button {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .color-palette button:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Mon Portfolio</h1>
+        <h1>Mon Portfolio Futuriste</h1>
         <p>Présentation de mes travaux</p>
     </header>
 
@@ -81,19 +122,36 @@
             <img src="projet2.jpg" alt="Capture d'écran du projet 2">
         </div>
 
-        <div class="project">
-            <h3>Nom du projet 3</h3>
-            <p>Description du projet 3.</p>
-            <img src="projet3.jpg" alt="Capture d'écran du projet 3">
-        </div>
-
         <!-- Ajoutez d'autres projets selon vos besoins -->
 
     </section>
 
+    <!-- Bouton pour ouvrir la palette de couleurs -->
+    <button class="color-button" onclick="toggleColorPalette()">Changer la couleur</button>
+
+    <!-- Interface de la palette de couleurs -->
+    <div class="color-palette">
+        <button style="background-color: #ff5733" onclick="changeColor('#ff5733')"></button>
+        <button style="background-color: #33ff57" onclick="changeColor('#33ff57')"></button>
+        <button style="background-color: #5733ff" onclick="changeColor('#5733ff')"></button>
+        <!-- Ajoutez d'autres couleurs selon vos besoins -->
+    </div>
+
     <footer>
-        <p>&copy; 2024 Mon Portfolio</p>
+        <p>&copy; 2024 Mon Portfolio Futuriste</p>
     </footer>
+
+    <script>
+        function toggleColorPalette() {
+            var palette = document.querySelector('.color-palette');
+            palette.style.display = (palette.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            document.querySelector('section').style.backgroundColor = color;
+        }
+    </script>
 
 </body>
 </html>
