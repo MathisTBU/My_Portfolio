@@ -98,6 +98,86 @@
         .color-palette button:hover {
             transform: scale(1.2);
         }
+
+        /* Morpion styles */
+        #game-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #292929;
+            color: #61dafb;
+            font-size: 24px;
+            border: 2px solid #61dafb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .cell:hover {
+            background-color: #1a1a1a;
+        }
+
+        /* Game Over animation */
+        #game-over {
+            display: none;
+            font-size: 36px;
+            margin-top: 20px;
+            color: #ff5733;
+            text-align: center;
+        }
+
+        /* Fireworks animation */
+        @keyframes fireworks {
+            0% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-500px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        #fireworks {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        #firework {
+            position: absolute;
+            width: 10px;
+            height: 100px;
+            background-color: #ff5733;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: fireworks 1s ease-out infinite;
+            transform-origin: center bottom;
+        }
+
+        #firework:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        #firework:nth-child(3) {
+            animation-delay: 0.4s;
+        }
     </style>
 </head>
 <body>
@@ -133,25 +213,4 @@
     <div class="color-palette">
         <button style="background-color: #ff5733" onclick="changeColor('#ff5733')"></button>
         <button style="background-color: #33ff57" onclick="changeColor('#33ff57')"></button>
-        <button style="background-color: #5733ff" onclick="changeColor('#5733ff')"></button>
-        <!-- Ajoutez d'autres couleurs selon vos besoins -->
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Mon Portfolio Futuriste</p>
-    </footer>
-
-    <script>
-        function toggleColorPalette() {
-            var palette = document.querySelector('.color-palette');
-            palette.style.display = (palette.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function changeColor(color) {
-            document.body.style.backgroundColor = color;
-            document.querySelector('section').style.backgroundColor = color;
-        }
-    </script>
-
-</body>
-</html>
+        <button style="background-color: #5733ff" onclick="changeColor('#5733ff
