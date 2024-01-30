@@ -1,3 +1,6 @@
+Bien sûr, voici le code HTML, CSS et JavaScript avec les dernières modifications, y compris l'ajout du bouton "Stop", la centralisation des messages de victoire/défaite, et les ajustements des styles pour les animations.
+
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -135,20 +138,16 @@
             background-color: #1a1a1a;
         }
 
-        /* Game Over animation */
+        /* Game Over and Fireworks styles */
         #game-over {
             display: none;
             font-size: 36px;
-            margin-top: 20px;
             color: #ff5733;
             text-align: center;
-        }
-
-        /* Fireworks animation */
-        @keyframes fireworks {
-            0% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-500px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         #fireworks {
@@ -159,6 +158,7 @@
             top: 0;
             left: 0;
             pointer-events: none;
+            z-index: 1000;
         }
 
         #firework {
@@ -178,53 +178,42 @@
         #firework:nth-child(3) {
             animation-delay: 0.4s;
         }
+
+        /* Stop button style */
+        #stop-button {
+            display: none;
+            background-color: #ff5733;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #stop-button:hover {
+            background-color: #e54831;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Mon Portfolio Futuriste</h1>
-        <p>Présentation de mes travaux</p>
-    </header>
-
-    <section>
-        <h2>Projets</h2>
-
-        <div class="project">
-            <h3>Nom du projet 1</h3>
-            <p>Description du projet 1.</p>
-            <img src="projet1.jpg" alt="Capture d'écran du projet 1">
-        </div>
-
-        <div class="project">
-            <h3>Nom du projet 2</h3>
-            <p>Description du projet 2.</p>
-            <img src="projet2.jpg" alt="Capture d'écran du projet 2">
-        </div>
-
-        <!-- Ajoutez d'autres projets selon vos besoins -->
-
-    </section>
-
-    <!-- Bouton pour ouvrir la palette de couleurs -->
-    <button class="color-button" onclick="toggleColorPalette()">Changer la couleur</button>
-
-    <!-- Interface de la palette de couleurs -->
-    <div class="color-palette">
-        <button style="background-color: #ff5733" onclick="changeColor('#ff5733')"></button>
-        <button style="background-color: #33ff57" onclick="changeColor('#33ff57')"></button>
-        <button style="background-color: #5733ff" onclick="changeColor('#5733ff')"></button>
-        <!-- Ajoutez d'autres couleurs selon vos besoins -->
-    </div>
-
-    <!-- Bouton pour lancer le jeu Morpion -->
-    <button class="color-button" onclick="startGame()">Game</button>
+    <!-- ... code précédent ... -->
 
     <!-- Morpion -->
     <div id="game-container">
-        <div id="board"></div>
+        <div id
+
+="board"></div>
         <div id="game-over"></div>
         <div id="fireworks"></div>
+        <button id="stop-button" onclick="stopGame()">Stop</button>
     </div>
 
     <footer>
@@ -232,108 +221,43 @@
     </footer>
 
     <script>
-        // Morpion variables
-        const board = document.getElementById('board');
-        const cells = [];
-        let currentPlayer = 'X';
-        let gameActive = true;
+        // ... code précédent ...
 
-        // Game Over and Fireworks elements
-        const gameOverElement = document.getElementById('game-over');
-        const fireworksElement = document.getElementById('fireworks');
-
-        // Function to start the Morpion game
-        function startGame() {
-            document.getElementById('game-container').style.display = 'flex';
-            document.getElementById('game-over').style.display = 'none';
-            document.getElementById('fireworks').style.display = 'none';
-            initializeBoard();
+        // Fonction pour arrêter le jeu Morpion
+        function stopGame() {
+            const morpionContainer = document.getElementById('game-container');
+            morpionContainer.style.display = 'none';
+            document.getElementById('stop-button').style.display = 'none';
         }
 
-        // Function to initialize the Morpion board
-        function initializeBoard() {
-            cells.length = 0;
-            board.innerHTML = '';
-            for (let i = 0; i < 9; i++) {
-                const cell = document.createElement('div');
-                cell.classList.add('cell');
-                cell.addEventListener('click', () => handleCellClick(i));
-                board.appendChild(cell);
-                cells.push(cell);
-            }
-            currentPlayer = 'X';
-            gameActive = true;
+        // Fonction pour centrer l'élément passé en paramètre
+        function centerElement(element) {
+            element.style.top = '50%';
+            element.style.left = '50%';
+            element.style.transform = 'translate(-50%, -50%)';
         }
 
-        // Function to handle cell clicks during the Morpion game
-        function handleCellClick(index) {
-            if (!gameActive || cells[index].textContent !== '') return;
-
-            cells[index].textContent = currentPlayer;
-            if (checkWin()) {
-                handleWin();
-            } else if (checkDraw()) {
-                handleDraw();
-            } else {
-                currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
-            }
-        }
-
-        // Function to check for a win in the Morpion game
-        function checkWin() {
-            const winConditions = [
-                [0, 1, 2],
-                [3, 4, 5],
-                [6, 7, 8],
-                [0, 3, 6],
-                [1, 4, 7],
-                [2, 5, 8],
-                [0, 4, 8],
-                [2, 4, 6]
-            ];
-
-            return winConditions.some(condition => {
-                const [a, b, c] = condition;
-                return cells[a].textContent !== '' && cells[a].textContent === cells[b].textContent && cells[b].textContent === cells[c].textContent;
-            });
-        }
-
-        // Function to handle a win in the Morpion game
+        // Fonction pour gérer la victoire
         function handleWin() {
             gameActive = false;
             const winner = currentPlayer;
             gameOverElement.textContent = `${winner} wins!`;
-            gameOverElement.style.color = '#33ff57'; // Change color for the winning message
+            gameOverElement.style.color = '#33ff57';
+            centerElement(gameOverElement);
             fireworksElement.style.display = 'block';
             startFireworks();
+            document.getElementById('stop-button').style.display = 'block';
         }
 
-        // Function to check for a draw in the Morpion game
-        function checkDraw() {
-            return cells.every(cell => cell.textContent !== '');
-        }
-
-        // Function to handle a draw in the Morpion game
+        // Fonction pour gérer la défaite
         function handleDraw() {
             gameActive = false;
             gameOverElement.textContent = "It's a draw!";
-            gameOverElement.style.color = '#ff5733'; // Change color for the draw message
-        }
-
-        // Function to start the fireworks animation
-        function startFireworks() {
-            fireworksElement.innerHTML = '<div id="firework"></div><div id="firework"></div><div id="firework"></div>';
-        }
-
-        // Function to toggle the Morpion and hide/show other elements
-        function toggleMorpion() {
-            const morpionContainer = document.getElementById('game-container');
-            const colorPalette = document.querySelector('.color-palette');
-            morpionContainer.style.display = (morpionContainer.style.display === 'flex') ? 'none' : 'flex';
-            colorPalette.style.display = 'none';
-            gameOverElement.style.display = 'none';
-            fireworksElement.style.display = 'none';
+            gameOverElement.style.color = '#ff5733';
+            centerElement(gameOverElement);
+            document.getElementById('stop-button').style.display = 'block';
         }
     </script>
 </body>
 </html>
+```
