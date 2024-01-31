@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio Futuriste</title>
+    <title>Mon Portfolio - Mathis</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -11,7 +11,6 @@
             padding: 0;
             background-color: #1a1a1a;
             color: #fff;
-            transition: background-color 0.5s;
         }
 
         header {
@@ -28,7 +27,6 @@
             background-color: #292929;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            transition: background-color 0.5s, box-shadow 0.5s;
         }
 
         h1, h2, h3 {
@@ -59,201 +57,54 @@
             bottom: 0;
             width: 100%;
         }
-
-        /* Bouton pour ouvrir la palette de couleurs */
-        .color-button {
-            background-color: #61dafb;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .color-button:hover {
-            background-color: #4fa8db;
-        }
-
-        /* Interface de la palette de couleurs */
-        .color-palette {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
-        }
-
-        .color-palette button {
-            width: 30px;
-            height: 30px;
-            margin: 5px;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .color-palette button:hover {
-            transform: scale(1.2);
-        }
-
-        /* Morpion styles */
-        #game-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        #board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            max-width: 300px;
-            margin: 20px auto;
-        }
-
-        .cell {
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #292929;
-            color: #61dafb;
-            font-size: 24px;
-            border: 2px solid #61dafb;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .cell:hover {
-            background-color: #1a1a1a;
-        }
-
-        /* Game Over and Fireworks styles */
-        #game-over {
-            display: none;
-            font-size: 36px;
-            color: #ff5733;
-            text-align: center;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        #fireworks {
-            display: none;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        #firework {
-            position: absolute;
-            width: 10px;
-            height: 100px;
-            background-color: #ff5733;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            animation: fireworks 1s ease-out infinite;
-            transform-origin: center bottom;
-        }
-
-        #firework:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        #firework:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        /* Stop button style */
-        #stop-button {
-            display: none;
-            background-color: #ff5733;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        #stop-button:hover {
-            background-color: #e54831;
-        }
     </style>
 </head>
 <body>
 
-    <!-- ... code précédent ... -->
+    <header>
+        <h1>Mon Portfolio</h1>
+        <p>Présentation de mes travaux</p>
+        <!-- Bouton pour changer la couleur de fond -->
+        <button id="changeColorButton">Changer la couleur</button>
+    </header>
 
-    <!-- Morpion -->
-    <div id="game-container">
-        <div id
+    <section>
+        <h2>Projets</h2>
 
-="board"></div>
-        <div id="game-over"></div>
-        <div id="fireworks"></div>
-        <button id="stop-button" onclick="stopGame()">Stop</button>
-    </div>
+        <div class="project">
+            <h3>Nom du projet 1</h3>
+            <p>Description du projet 1.</p>
+            <img src="projet1.jpg" alt="Capture d'écran du projet 1">
+        </div>
+
+        <div class="project">
+            <h3>Nom du projet 2</h3>
+            <p>Description du projet 2.</p>
+            <img src="projet2.jpg" alt="Capture d'écran du projet 2">
+        </div>
+
+        <div class="project">
+            <h3>Nom du projet 3</h3>
+            <p>Description du projet 3.</p>
+            <img src="projet3.jpg" alt="Capture d'écran du projet 3">
+        </div>
+
+        <!-- Ajoutez d'autres projets selon vos besoins -->
+
+    </section>
 
     <footer>
-        <p>&copy; 2024 Mon Portfolio Futuriste</p>
+        <p>&copy; 2024 Mon Portfolio</p>
     </footer>
 
     <script>
-        // ... code précédent ...
-
-        // Fonction pour arrêter le jeu Morpion
-        function stopGame() {
-            const morpionContainer = document.getElementById('game-container');
-            morpionContainer.style.display = 'none';
-            document.getElementById('stop-button').style.display = 'none';
-        }
-
-        // Fonction pour centrer l'élément passé en paramètre
-        function centerElement(element) {
-            element.style.top = '50%';
-            element.style.left = '50%';
-            element.style.transform = 'translate(-50%, -50%)';
-        }
-
-        // Fonction pour gérer la victoire
-        function handleWin() {
-            gameActive = false;
-            const winner = currentPlayer;
-            gameOverElement.textContent = `${winner} wins!`;
-            gameOverElement.style.color = '#33ff57';
-            centerElement(gameOverElement);
-            fireworksElement.style.display = 'block';
-            startFireworks();
-            document.getElementById('stop-button').style.display = 'block';
-        }
-
-        // Fonction pour gérer la défaite
-        function handleDraw() {
-            gameActive = false;
-            gameOverElement.textContent = "It's a draw!";
-            gameOverElement.style.color = '#ff5733';
-            centerElement(gameOverElement);
-            document.getElementById('stop-button').style.display = 'block';
-        }
+        // Ajoutez une fonction pour changer la couleur de fond
+        document.getElementById('changeColorButton').addEventListener('click', function() {
+            // Vous pouvez ajouter d'autres couleurs selon vos besoins
+            var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            document.body.style.backgroundColor = randomColor;
+        });
     </script>
+
 </body>
 </html>
